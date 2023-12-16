@@ -1,7 +1,7 @@
 const SLICE_COUNT = 16;
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK);
+  pScope.output_mode(OUTPUT_GIF(1000));
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false); //line on circle show
   pScope.set_direction(CCW);
