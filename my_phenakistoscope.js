@@ -1,54 +1,66 @@
 const SLICE_COUNT = 16;
 
-function setup_pScope(pScope){
+function setup_pScope(pScope) {
   pScope.output_mode(OUTPUT_GIF(1000));
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false); //line on circle show
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
-  pScope.load_image("ship" , "png");
+  pScope.load_image("pirate_ship", "png");
 }
 
-function setup_layers(pScope){
+function setup_layers(pScope) {
+  new PLayer(); //lets us draw the whole circle background, ignoring the boundaries
 
-  new PLayer(null, 220);  //lets us draw the whole circle background, ignoring the boundaries
+  let sky = new PLayer(theSky);
+  sky.mode(RING);
 
-  var layer1 = new PLayer(faces);
-  layer1.mode( SWIRL(2) );
-  layer1.set_boundary( 100, 1000 );
+  let sea = new PLayer(wave);
+  sea.mode(RING);
 
-  
-  var layer2 = new PLayer(squares);
-  layer2.mode(RING);
-  layer2.set_boundary( 0, 400 );
+  let skySun = new PLayer(sun);
+  skySun.mode(SWIRL(1));
+  skySun.set_boundary(60, 40);
+
+  let pirateShip = new PLayer(ship);
+  pirateShip.mode(SWIRL(1));
+  pirateShip.set_boundary(500, 530); //where the image start and stop.
 }
 
-function faces(x, y, animation, pScope){
-  
-  scale(0.5)
-  pScope.draw_image("ship",x,y);
-  
-  scale(animation.frame*2);
-
-  ellipse(0,0,50,50); // draw head
-  fill(30);
-  ellipse(-10,-10,10,10); //draw eye
-  ellipse(10,-10,10,10); // draw eye
-  arc(0,10,20,10,0,180); // draw mouth
-
+function ship(x, y, animation, pScope) {
+  scale(0.8);
+  pScope.draw_image("pirate_ship", x, y);
 }
 
-function squares(x, y, animation, pScope){
+function wave(x, y, animation, pScope) {
+  let angleOffset = (360 / SLICE_COUNT) / 2
+  let backgroundArcStart = 270 - angleOffset;
+  let backgroundArcEnd = 270 + angleOffset;
+  //sea
+  fill(69, 212, 245);
+  arc(x, y, 800, 800, backgroundArcStart, backgroundArcEnd); // draws "pizza slice" in the background
+  //the wave
+  fill(255)
+  rect(-10, -300 - animation.wave() * 50, 20, 20) // .wave is a cosine wave btw
+}
 
+function theSky(x, y, animation, pScope) {
   // this is how you set up a background for a specific layer
   let angleOffset = (360 / SLICE_COUNT) / 2
   let backgroundArcStart = 270 - angleOffset;
   let backgroundArcEnd = 270 + angleOffset;
+  //blue sky
+  scale(2.5)
+  fill(204, 254, 255); //blue background
+  arc(x, y, 800, 800, backgroundArcStart, backgroundArcEnd); // draws "pizza slice" in the background
+  //white part
+  scale(0.7);
+  fill(255); //blue background
+  arc(x, y, 800, 800, backgroundArcStart, backgroundArcEnd); // draws "pizza slice" in the background
 
-  fill(66, 135, 245)
-  arc(x,y,800,800,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
+}
 
-  //fill(255)
-  //rect(-10,-300-animation.wave()*50,20,20) // .wave is a cosine wave btw
-
+function sun(x, y, animation, pScope) {
+  fill(255, 255, 0);
+  circle(0, 900, 80);
 }
