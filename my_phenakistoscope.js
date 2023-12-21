@@ -1,7 +1,7 @@
 const SLICE_COUNT = 16;
 
 function setup_pScope(pScope) {
-  pScope.output_mode(OUTPUT_GIF(1000));
+  pScope.output_mode(ANIMATED_DISK);
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false); //line on circle show
   pScope.set_direction(CCW);
@@ -28,7 +28,7 @@ function setup_layers(pScope) {
 }
 
 function ship(x, y, animation, pScope) {
-  scale(0.8);
+  
   pScope.draw_image("pirate_ship", x, y);
 }
 
