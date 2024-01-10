@@ -10,6 +10,7 @@ function setup_pScope(pScope) {
   pScope.load_image("wave", "png");
   pScope.load_image("wave2", "png");
   pScope.load_image("wave3","png");
+  pScope.load_image_sequence("cloud" , "png", 15);
 }
 
 function setup_layers(pScope) {
@@ -33,7 +34,12 @@ function setup_layers(pScope) {
   let skySun = new PLayer(sun);
   skySun.mode(SWIRL(1));
   skySun.set_boundary(5, 15);
-  
+
+  //cloud
+  let cloudS = new PLayer(cloudL);
+  cloudS.mode(RING);
+  cloudS.set_boundary(0,1000);
+
   //the ship
   let pirateShip = new PLayer(ship);
   pirateShip.mode(SWIRL(1));
@@ -86,4 +92,9 @@ function sun(x, y, animation, pScope) {
 
   fill(255, 255, 0);
   circle(0, 900, 95);
+}
+
+function cloudL (x,y,animation,pScope){
+  scale(0.9);
+  pScope.draw_image_from_sequence("cloud",x,-950,animation.frame);
 }
