@@ -3,7 +3,7 @@ const SLICE_COUNT = 16;
 function setup_pScope(pScope) {
   pScope.output_mode(ANIMATED_DISK);
   pScope.scale_for_screen(true);
-  pScope.draw_layer_boundaries(false); //line on circle show
+  pScope.draw_layer_boundaries(true); //line on circle show
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
   pScope.load_image("pirate_ship", "png");
@@ -20,11 +20,11 @@ function setup_layers(pScope) {
 
   let skySun = new PLayer(sun);
   skySun.mode(SWIRL(1));
-  skySun.set_boundary(60, 40);
+  skySun.set_boundary(5,15);
 
   let pirateShip = new PLayer(ship);
   pirateShip.mode(SWIRL(1));
-  pirateShip.set_boundary(500, 530); //where the image start and stop.
+  pirateShip.set_boundary(500, 510); //where the image start and stop.
 }
 
 function ship(x, y, animation, pScope) {
@@ -54,13 +54,21 @@ function theSky(x, y, animation, pScope) {
   fill(204, 254, 255); //blue background
   arc(x, y, 800, 800, backgroundArcStart, backgroundArcEnd); // draws "pizza slice" in the background
   //white part
-  scale(0.7);
-  fill(255); //blue background
-  arc(x, y, 800, 800, backgroundArcStart, backgroundArcEnd); // draws "pizza slice" in the background
+
+  //scale(0.7);// the second layer, where the ship is.
+  //fill(204,254,255); //blue background
+  //arc(x, y, 800, 800, backgroundArcStart, backgroundArcEnd); // draws "pizza slice" in the background
 
 }
 
 function sun(x, y, animation, pScope) {
-  fill(255, 255, 0);
-  circle(0, 900, 80);
+  noStroke();
+  fill(255,255,255);
+  circle(0,900,180);
+  
+  fill(255,255,200);
+  circle(0, 900, 140);
+
+  fill(255,255,0);
+  circle(0, 900, 95);
 }
