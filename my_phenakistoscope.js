@@ -30,6 +30,10 @@ function setup_layers(pScope) {
   let sea3 = new PLayer(waveL3);
   sea3.mode(RING);
 
+  //the centre
+  let layer2 = new PLayer(squares);
+  layer2.mode(RING);
+
   //the sun
   let skySun = new PLayer(sun);
   skySun.mode(SWIRL(1));
@@ -65,19 +69,28 @@ function waveL2(x, y, animation, pScope) {
   pScope.draw_image("wave2", wave2X, -500);
 }
 
+function squares(x, y, animation, pScope) {
+  let angleOffset = (360 / SLICE_COUNT) / 2;
+  let backgroundArcStart = 270 - angleOffset;
+  let backgroundArcEnd = 270 + angleOffset;
+  noStroke();
+  fill(16, 71, 239);
+  arc(x, y, 185, 185, backgroundArcStart, backgroundArcEnd); // draws "pizza slice" in the background
+}
+
 function waveL3(x, y, animation, pScope) {
   //the third wave
-  scale(0.4)
+  scale(0.4);
   let wave3X = animation.wave(1) * +50;
   pScope.draw_image("wave3", wave3X, -400);
 }
 
 function theSky(x, y, animation, pScope) {
-  let angleOffset = (360 / SLICE_COUNT) / 2
+  let angleOffset = (360 / SLICE_COUNT) / 2;
   let backgroundArcStart = 270 - angleOffset;
   let backgroundArcEnd = 270 + angleOffset;
   //blue sky
-  scale(2.5)
+  scale(2.5);
   fill(204, 254, 255); //blue background
   arc(x, y, 800, 800, backgroundArcStart, backgroundArcEnd); // draws "pizza slice" in the background
 }
@@ -96,5 +109,5 @@ function sun(x, y, animation, pScope) {
 
 function cloudL(x, y, animation, pScope) {
   scale(0.9);
-  pScope.draw_image_from_sequence("cloud", x, -950, animation.frame);
+  pScope.draw_image_from_sequence("cloud", x, -900, animation.frame);
 }
