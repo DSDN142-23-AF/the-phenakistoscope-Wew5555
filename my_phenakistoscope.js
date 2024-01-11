@@ -9,8 +9,8 @@ function setup_pScope(pScope) {
   pScope.load_image("pirate_ship", "png");
   pScope.load_image("wave", "png");
   pScope.load_image("wave2", "png");
-  pScope.load_image("wave3","png");
-  pScope.load_image_sequence("cloud" , "png", 15);
+  pScope.load_image("wave3", "png");
+  pScope.load_image_sequence("cloud", "png", 15);
 }
 
 function setup_layers(pScope) {
@@ -38,7 +38,7 @@ function setup_layers(pScope) {
   //cloud
   let cloudS = new PLayer(cloudL);
   cloudS.mode(RING);
-  cloudS.set_boundary(0,1000);
+  cloudS.set_boundary(0, 1000);
 
   //the ship
   let pirateShip = new PLayer(ship);
@@ -65,11 +65,11 @@ function waveL2(x, y, animation, pScope) {
   pScope.draw_image("wave2", wave2X, -500);
 }
 
-function waveL3(x,y,animation,pScope){
+function waveL3(x, y, animation, pScope) {
   //the third wave
   scale(0.4)
-  let wave3X = animation.wave(1)*+50;
-  pScope.draw_image("wave3",wave3X, -400);
+  let wave3X = animation.wave(1) * +50;
+  pScope.draw_image("wave3", wave3X, -400);
 }
 
 function theSky(x, y, animation, pScope) {
@@ -94,7 +94,7 @@ function sun(x, y, animation, pScope) {
   circle(0, 900, 95);
 }
 
-function cloudL (x,y,animation,pScope){
+function cloudL(x, y, animation, pScope) {
   scale(0.9);
-  pScope.draw_image_from_sequence("cloud",x,-950,animation.frame);
+  pScope.draw_image_from_sequence("cloud", x, -950, animation.frame);
 }
